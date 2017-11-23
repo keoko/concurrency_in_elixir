@@ -2,9 +2,7 @@ defmodule Chat.Main do
 
   def main() do
     room = [self()]
-    server_pid = spawn(fn ->
-      Chat.Server.loop(room)
-    end)
+    server_pid = spawn(Chat.Server, :loop, [room])
 
     spawn(fn() ->
       Chat.Client.join(server_pid)

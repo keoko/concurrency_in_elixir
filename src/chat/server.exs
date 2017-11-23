@@ -3,7 +3,7 @@ defmodule Chat.Server do
     receive do
       {pid, :join} ->
         notify_all(room, self(), "some user with pid #{inspect pid} joined")
-        send(self(), :ok)
+        send(pid, {self(), :ok})
         loop([pid | room])
 
       {pid, {:say, message}} ->

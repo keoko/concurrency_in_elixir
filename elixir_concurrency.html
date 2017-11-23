@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Concurrency in Elixir: Actor Model</title>
+<title>Concurrency in Elixir Actor Model</title>
 <meta name="author" content="(Natxo Cabré)"/>
 <style type="text/css">
 .underline { text-decoration: underline; }
@@ -27,8 +27,8 @@
 <div class="reveal">
 <div class="slides">
 <section>
-<section id="slide-org326c694">
-<h2 id="org326c694">Concurrency in Elixir = Actor Model</h2>
+<section id="slide-org50a274e">
+<h2 id="org50a274e">Concurrency in Elixir = Actor Model</h2>
 <blockquote nil>
 <p>
 "The world is concurrent.<br />
@@ -41,32 +41,31 @@ Things fail."<br />
 </section>
 </section>
 <section>
-<section id="slide-org021f3d7">
-<h2 id="org021f3d7">Plan</h2>
+<section id="slide-orgb3299c1">
+<h2 id="orgb3299c1">Plan</h2>
 <ul>
 <li>Why concurrency?</li>
 <li>Theory of Actor Model</li>
 <li>Implementation of Actor Model in Elixir</li>
-<li>Demo</li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-org78a7524">
-<h2 id="org78a7524">Why concurrency?</h2>
-<div class="outline-text-2" id="text-org78a7524">
+<section id="slide-org038c878">
+<h2 id="org038c878">Why concurrency?</h2>
+<div class="outline-text-2" id="text-org038c878">
 </div></section>
-<section id="slide-orgc78a985">
-<h3 id="orgc78a985">"The Free Lunch Is Over" (2005)</h3>
+<section id="slide-orgd7a709a">
+<h3 id="orgd7a709a">"The Free Lunch Is Over" (2005)</h3>
 
 <div class="figure">
 <p><img src="./img/free_lunch.png" alt="free_lunch.png" height="50%," width="50%" style="border: none;" />
 </p>
 </div>
 </section>
-<section id="slide-org8e82942">
-<h3 id="org8e82942">"The Free Lunch Is Over" Conclusion</h3>
+<section id="slide-orgd1e6645">
+<h3 id="orgd1e6645">"The Free Lunch Is Over" Conclusion</h3>
 <blockquote nil>
 <p>
 "If you haven’t done so already, <b>now is the time to take a hard look at the design of your application, determine what operations are CPU-sensitive</b> now or are likely to become so soon, <b>and identify how those places could benefit from concurrency</b>.<br />
@@ -75,8 +74,8 @@ Now is also the time for you and <b>your team to grok concurrent programming</b>
 </blockquote>
 
 </section>
-<section id="slide-orgcac801a">
-<h3 id="orgcac801a">New Concurrent Programming Languages</h3>
+<section id="slide-org6b99385">
+<h3 id="org6b99385">New Concurrent Programming Languages</h3>
 <dl>
 <dt>Clojure</dt><dd>2007 [STM, agents, CSP] (Java, CLR)</dd>
 <dt>Go</dt><dd>2009 [CSP] (Python, C++)</dd>
@@ -84,8 +83,8 @@ Now is also the time for you and <b>your team to grok concurrent programming</b>
 
 </dl>
 </section>
-<section id="slide-orgcd9ef3e">
-<h3 id="orgcd9ef3e">Languages/Frameworks with Actors libraries</h3>
+<section id="slide-org1262c32">
+<h3 id="org1262c32">Languages/Frameworks with Actors libraries</h3>
 <dl>
 <dt>Erlang/Elixir</dt><dd>-</dd>
 <dt>Scala</dt><dd>Akka</dd>
@@ -97,21 +96,22 @@ Now is also the time for you and <b>your team to grok concurrent programming</b>
 </section>
 </section>
 <section>
-<section id="slide-orgb770190">
-<h2 id="orgb770190">Actor Model</h2>
-<div class="outline-text-2" id="text-orgb770190">
+<section id="slide-orgb7518c4">
+<h2 id="orgb7518c4">Actor Model</h2>
+<div class="outline-text-2" id="text-orgb7518c4">
 </div></section>
-<section id="slide-orgf622772">
-<h3 id="orgf622772">Carl Hewitt (1973)</h3>
+<section id="slide-org0a864f1">
+<h3 id="org0a864f1">Carl Hewitt (1973)</h3>
 <p>
 Actor Model is a conceptual model to deal with concurrent computation.
 </p>
 </section>
-<section id="slide-org283fb4c">
-<h3 id="org283fb4c">Actor</h3>
+<section id="slide-org136ecf6">
+<h3 id="org136ecf6">Actor</h3>
 <ul>
 <li>An actor is the <b>fundamental unit of computation</b>.</li>
-<li>It can do only:
+<li>Internal State.</li>
+<li>It can do only one of thse 3 things:
 <ol>
 <li>create some more actors</li>
 <li>send messages</li>
@@ -121,8 +121,8 @@ Actor Model is a conceptual model to deal with concurrent computation.
 
 </ul>
 </section>
-<section id="slide-org804ccb2">
-<h3 id="org804ccb2">"One Ant is no Ant"</h3>
+<section id="slide-orgf53c4cc">
+<h3 id="orgf53c4cc">"One Ant is no Ant"</h3>
 <p>
 Actors come in "systems". To distinguish between them, they need an address.
 </p>
@@ -132,8 +132,8 @@ Actors come in "systems". To distinguish between them, they need an address.
 </p>
 </div>
 </section>
-<section id="slide-org9cd38c4">
-<h3 id="org9cd38c4">Message Passing</h3>
+<section id="slide-orgba7a62f">
+<h3 id="orgba7a62f">Message Passing</h3>
 <ul>
 <li>Messages are sent asynchronously</li>
 <li>Message order is not guaranteed</li>
@@ -145,20 +145,25 @@ Actors come in "systems". To distinguish between them, they need an address.
 </section>
 </section>
 <section>
-<section id="slide-orgff9f80e">
-<h2 id="orgff9f80e">Concurrency in Elixir</h2>
-<div class="outline-text-2" id="text-orgff9f80e">
+<section id="slide-org4ace4a5">
+<h2 id="org4ace4a5">Concurrency in Elixir</h2>
+<div class="outline-text-2" id="text-org4ace4a5">
 </div></section>
-<section id="slide-org18525d7">
-<h3 id="org18525d7">Actor = Process</h3>
+<section id="slide-org598574c">
+<h3 id="org598574c">Actor = Process</h3>
+<ul>
+<li>Very lightweight compared to OS threads and processes.</li>
+<li>Processes share no memory.</li>
+
+</ul>
 <div class="org-src-container">
 
 <pre  class="src src-elixir">spawn <span style="color: #4f97d7; font-weight: bold;">fn</span> -&gt; <span style="color: #a45bad;">1</span>+<span style="color: #a45bad;">2</span> <span style="color: #4f97d7; font-weight: bold;">end</span>
 </pre>
 </div>
 </section>
-<section id="slide-org87c623c">
-<h3 id="org87c623c">Actor Example</h3>
+<section id="slide-orgc352d5f">
+<h3 id="orgc352d5f">Actor Example</h3>
 <div class="org-src-container">
 
 <pre  class="src src-elixir"><span style="color: #4f97d7; font-weight: bold;">defmodule</span> <span style="color: #ce537a; font-weight: bold;">Counter</span> <span style="color: #4f97d7; font-weight: bold;">do</span>
@@ -176,8 +181,8 @@ Actors come in "systems". To distinguish between them, they need an address.
 </pre>
 </div>
 </section>
-<section id="slide-orgf88ee2f">
-<h3 id="orgf88ee2f">Message = Term</h3>
+<section id="slide-orgc1cb45c">
+<h3 id="orgc1cb45c">Message = Term</h3>
 <div class="org-src-container">
 
 <pre  class="src src-elixir"><span style="color: #a45bad;">42</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">number</span>
@@ -203,8 +208,14 @@ open_port <span style="color: #2aa1ae; background-color: #292e34;"># </span><spa
 </pre>
 </div>
 </section>
-<section id="slide-orgc129977">
-<h3 id="orgc129977">Message Passing</h3>
+<section id="slide-org5ecc16e">
+<h3 id="org5ecc16e">Message Passing</h3>
+<ul>
+<li>Asynchronous (non-blocking)</li>
+<li>Data Copy</li>
+<li>Causal Ordering</li>
+
+</ul>
 <div class="org-src-container">
 
 <pre  class="src src-elixir"><span style="color: #7590db;">pid</span> = spawn<span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">&amp;Counter</span>.loop/<span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>
@@ -216,99 +227,67 @@ open_port <span style="color: #2aa1ae; background-color: #292e34;"># </span><spa
 </section>
 </section>
 <section>
-<section id="slide-org2e93230">
-<h2 id="org2e93230">Demo</h2>
-<div class="outline-text-2" id="text-org2e93230">
+<section id="slide-org31a0c1b">
+<h2 id="org31a0c1b">Demo</h2>
+<div class="outline-text-2" id="text-org31a0c1b">
 </div></section>
-<section id="slide-org700472e">
-<h3 id="org700472e">Counter</h3>
+<section id="slide-orgb565b94">
+<h3 id="orgb565b94">Counter</h3>
 </section>
-<section id="slide-org3c918e1">
-<h3 id="org3c918e1">Chat Server</h3>
+<section id="slide-org5f680fc">
+<h3 id="org5f680fc">Chat Server</h3>
 </section>
-<section id="slide-org7c4d9a4">
-<h3 id="org7c4d9a4">Distributed Chat Server</h3>
+<section id="slide-orgb617392">
+<h3 id="orgb617392">Distributed Chat Server</h3>
 </section>
 </section>
 <section>
-<section id="slide-org155e813">
-<h2 id="org155e813">Recap</h2>
+<section id="slide-orgef6656a">
+<h2 id="orgef6656a">Recap</h2>
 <ul>
 <li>"The free lunch is over", we have to start designing with concurrency in mind.</li>
-<li>Actor Model is a conceptual model to deal with concurrent computation.</li>
+<li>Actor Model models concurrency with message passing between independent actors.</li>
 <li>Erlang/Elixir implements Actor Model to build massively concurrent, fault-tolerant, scalable systems.</li>
-<li>An actor is an Erlang/Elixir process which encapsulates state.</li>
-<li>Actors communicate between them with messages, providing they have its PID (process id).</li>
 
 </ul>
-
 </section>
 </section>
 <section>
-<section id="slide-org1273747">
-<h2 id="org1273747">References</h2>
+<section id="slide-orgb1212a8">
+<h2 id="orgb1212a8">References</h2>
 <ul>
-<li><a href="http://www.gotw.ca/publications/concurrency-ddj.htm">The Free Lunch Is Over</a></li>
-<li><a href="https://www.youtube.com/watch?v=7erJ1DV_Tlo">Hewitt, Meijer and Szyperski: The Actor Model</a></li>
-<li><a href="http://theerlangelist.blogspot.com.es/2013/01/actors-in-erlangelixir.html">Actors in Erlang/Elixir</a></li>
+<li><a href="http://www.gotw.ca/publications/concurrency-ddj.htm">The Free Lunch Is Over</a>  [ARTICLE]</li>
+<li><a href="https://www.youtube.com/watch?v=7erJ1DV_Tlo">Hewitt, Meijer and Szyperski: The Actor Model</a> [VIDEO]</li>
+<li><a href="http://theerlangelist.blogspot.com.es/2013/01/actors-in-erlangelixir.html">Actors in Erlang/Elixir</a> [ARTICLE]</li>
 <li><a href="https://www.youtube.com/watch?v=lPTqcecwkJg&amp;t=177s">Introduction to the Actor Model for Concurrent Computation</a></li>
-<li><a href="http://www.brianstorti.com/the-actor-model/">The actor model in 10 minutes</a></li>
-<li><a href="https://pragprog.com/book/pb7con/seven-concurrency-models-in-seven-weeks">Seven Concurrency Models in Seven Weeks: When Threads Unravel</a></li>
-<li><a href="https://gist.github.com/josevalim/2783092/a9740c9652267d55851ede2a7a3091c72466db9b">Jose Valim's chat sample</a></li>
-<li><a href="http://www.akitaonrails.com/2015/11/25/exmessenger-exercise-understanding-nodes-in-elixir">ExMessenger Exercise: Understanding Nodes in Elixir</a></li>
+<li><a href="http://www.brianstorti.com/the-actor-model/">The actor model in 10 minutes</a> [ARTICLE]</li>
+<li><a href="https://pragprog.com/book/pb7con/seven-concurrency-models-in-seven-weeks">Seven Concurrency Models in Seven Weeks: When Threads Unravel</a> [BOOK]</li>
+<li><a href="https://gist.github.com/josevalim/2783092/a9740c9652267d55851ede2a7a3091c72466db9b">Jose Valim's chat sample</a> [CODE]</li>
+<li><a href="http://www.akitaonrails.com/2015/11/25/exmessenger-exercise-understanding-nodes-in-elixir">ExMessenger Exercise: Understanding Nodes in Elixir</a> [CODE]</li>
 
 </ul>
 </section>
 </section>
 <section>
-<section id="slide-org131872e">
-<h2 id="org131872e">Q&amp;A</h2>
+<section id="slide-orgc390362">
+<h2 id="orgc390362">Food For Thought</h2>
+<dl>
+<dt>OTP</dt><dd>set of Erlang libraries to module concurrent processes well.</dd>
+<dt>Riak Core</dt><dd>Library to build Distributed Systems in Erlang</dd>
+<dt>Phoenix</dt><dd>Elixir Web Server ala "Ruby on Rails"</dd>
+<dt>Nerves</dt><dd>Framework to build projects in embedded systems with Elixir</dd>
+
+</dl>
 </section>
 </section>
 <section>
-<section id="slide-orgef494f3">
-<h2 id="orgef494f3">Thanks!</h2>
-<p>
-#+BEGIN<sub>COMMENT</sub>
-</p>
+<section id="slide-orgc0f22c2">
+<h2 id="orgc0f22c2">Q&amp;A</h2>
 </section>
 </section>
 <section>
-<section id="slide-orgd85d53f">
-<h2 id="orgd85d53f">To check</h2>
-<p>
-Sasa Juric Thinking in Actors
-Chat Server
-learn you some erlang
-format elixir
-alchemist
-accounts
-</p>
-<ul>
-<li>sasa juric video</li>
-
-</ul>
-
-
-</section>
-</section>
-<section>
-<section id="slide-org3ccabd1">
-<h2 id="org3ccabd1">Do it or not?</h2>
-<ul>
-<li>fault tolerance</li>
-<li>distribution</li>
-<li>imperative env, functional shell</li>
-<li></li>
-
-<li>register processes</li>
-<li><a href="https://www.dailydrip.com/topics/elixir/drips/processes-and-messaging-08687de7-07c6-4cc3-b6c6-4398d137820c">https://www.dailydrip.com/topics/elixir/drips/processes-and-messaging-08687de7-07c6-4cc3-b6c6-4398d137820c</a></li>
-<li><a href="http://learnyousomeerlang.com/the-hitchhikers-guide-to-concurrency#concepts-of-concurrency">http://learnyousomeerlang.com/the-hitchhikers-guide-to-concurrency#concepts-of-concurrency</a></li>
-
-</ul>
-<p>
-#+END<sub>COMMENT</sub>
-</p>
+<section id="slide-org44c9b44">
+<h2 id="org44c9b44">Thanks!</h2>
 </section>
 </section>
 </div>

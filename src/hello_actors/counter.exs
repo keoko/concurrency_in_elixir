@@ -9,6 +9,6 @@ defmodule Counter do
   end
 end
 
-counter = spawn(Counter, :loop, [1])
-send(counter, {:next})
-send(counter, {:next})
+#counter = spawn(Counter, :loop, [1])
+#send(counter, {:next})
+#send(counter, {:next})

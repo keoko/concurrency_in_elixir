@@ -1,4 +1,4 @@
-#+Title: Concurrency in Elixir: Actor Model
+#+Title: Concurrency in Elixir Actor Model
 #+Author: Natxo Cabré
 #+Email: @keoko
 #+OPTIONS: toc:nil num:nil reveal_slide_number:nil reveal_title_slide:nil
@@ -16,7 +16,6 @@ Things fail."\\
 - Why concurrency?
 - Theory of Actor Model
 - Implementation of Actor Model in Elixir
-- Demo
 * Why concurrency? 
 ** "The Free Lunch Is Over" (2005)
 #+ATTR_HTML: :height 50%, :width 50% :style border: none;
@@ -42,7 +41,8 @@ Now is also the time for you and *your team to grok concurrent programming*'s re
 Actor Model is a conceptual model to deal with concurrent computation.
 ** Actor
 - An actor is the *fundamental unit of computation*.
-- It can do only:
+- Internal State.
+- It can do only one of thse 3 things:
   1. create some more actors
   2. send messages
   3. designate how to handle the next message it will receive
@@ -58,12 +58,17 @@ Actors come in "systems". To distinguish between them, they need an address.
 - There is no intermediary
 * Concurrency in Elixir
 ** Actor = Process
+- Very lightweight compared to OS threads and processes.
+- Processes share no memory.
 #+INCLUDE: "src/slides/process_sum.exs" src elixir
 ** Actor Example
 #+INCLUDE: "src/slides/process_counter.exs" src elixir
 ** Message = Term
 #+INCLUDE: "src/slides/terms.exs" src elixir
 ** Message Passing
+- Asynchronous (non-blocking)
+- Data Copy
+- Causal Ordering
 #+INCLUDE: "src/slides/message_passing.exs" src elixir
 * Demo
 ** Counter
@@ -71,20 +76,17 @@ Actors come in "systems". To distinguish between them, they need an address.
 ** Distributed Chat Server
 * Recap
 - "The free lunch is over", we have to start designing with concurrency in mind.
-- Actor Model is a conceptual model to deal with concurrent computation.
+- Actor Model models concurrency with message passing between independent actors.
 - Erlang/Elixir implements Actor Model to build massively concurrent, fault-tolerant, scalable systems.
-- An actor is an Erlang/Elixir process which encapsulates state.
-- Actors communicate between them with messages, providing they have its PID (process id).
-
 * References
-- [[http://www.gotw.ca/publications/concurrency-ddj.htm][The Free Lunch Is Over]]  
-- [[https://www.youtube.com/watch?v=7erJ1DV_Tlo][Hewitt, Meijer and Szyperski: The Actor Model]]
-- [[http://theerlangelist.blogspot.com.es/2013/01/actors-in-erlangelixir.html][Actors in Erlang/Elixir]]
+- [[http://www.gotw.ca/publications/concurrency-ddj.htm][The Free Lunch Is Over]]  [ARTICLE]
+- [[https://www.youtube.com/watch?v=7erJ1DV_Tlo][Hewitt, Meijer and Szyperski: The Actor Model]] [VIDEO]
+- [[http://theerlangelist.blogspot.com.es/2013/01/actors-in-erlangelixir.html][Actors in Erlang/Elixir]] [ARTICLE]
 - [[https://www.youtube.com/watch?v=lPTqcecwkJg&t=177s][Introduction to the Actor Model for Concurrent Computation]]
-- [[http://www.brianstorti.com/the-actor-model/][The actor model in 10 minutes]]
-- [[https://pragprog.com/book/pb7con/seven-concurrency-models-in-seven-weeks][Seven Concurrency Models in Seven Weeks: When Threads Unravel]]
-- [[https://gist.github.com/josevalim/2783092/a9740c9652267d55851ede2a7a3091c72466db9b][Jose Valim's chat sample]]
-- [[http://www.akitaonrails.com/2015/11/25/exmessenger-exercise-understanding-nodes-in-elixir][ExMessenger Exercise: Understanding Nodes in Elixir]]
+- [[http://www.brianstorti.com/the-actor-model/][The actor model in 10 minutes]] [ARTICLE]
+- [[https://pragprog.com/book/pb7con/seven-concurrency-models-in-seven-weeks][Seven Concurrency Models in Seven Weeks: When Threads Unravel]] [BOOK]
+- [[https://gist.github.com/josevalim/2783092/a9740c9652267d55851ede2a7a3091c72466db9b][Jose Valim's chat sample]] [CODE]
+- [[http://www.akitaonrails.com/2015/11/25/exmessenger-exercise-understanding-nodes-in-elixir][ExMessenger Exercise: Understanding Nodes in Elixir]] [CODE]
 * Food For Thought
 - OTP :: set of Erlang libraries to module concurrent processes well.
 - Riak Core :: Library to build Distributed Systems in Erlang
@@ -92,15 +94,3 @@ Actors come in "systems". To distinguish between them, they need an address.
 - Nerves :: Framework to build projects in embedded systems with Elixir
 * Q&A
 * Thanks!
-
-#+BEGIN_COMMENT
-* To check
-Chat Server
-learn you some erlang
-alchemist
-accounts
-
-- register processes
-- https://www.dailydrip.com/topics/elixir/drips/processes-and-messaging-08687de7-07c6-4cc3-b6c6-4398d137820c
-- http://learnyousomeerlang.com/the-hitchhikers-guide-to-concurrency#concepts-of-concurrency
-#+END_COMMENT
