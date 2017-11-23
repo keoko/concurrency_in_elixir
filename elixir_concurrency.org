@@ -1,6 +1,3 @@
-#+Title: Concurrency in Elixir Actor Model
-#+Author: Natxo Cabré
-#+Email: @keoko
 #+OPTIONS: toc:nil num:nil reveal_slide_number:nil reveal_title_slide:nil
 #+REVEAL_THEME: beige
 #+REVEAL_TRANS: linear

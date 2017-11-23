@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<title>Concurrency in Elixir Actor Model</title>
-<meta name="author" content="(Natxo Cabré)"/>
+<title></title>
+<meta name="author" content="(Ignacio Cabre Barrera)"/>
 <style type="text/css">
 .underline { text-decoration: underline; }
 </style>
@@ -27,8 +27,8 @@
 <div class="reveal">
 <div class="slides">
 <section>
-<section id="slide-org50a274e">
-<h2 id="org50a274e">Concurrency in Elixir = Actor Model</h2>
+<section id="slide-org948eff1">
+<h2 id="org948eff1">Concurrency in Elixir = Actor Model</h2>
 <blockquote nil>
 <p>
 "The world is concurrent.<br />
@@ -41,8 +41,8 @@ Things fail."<br />
 </section>
 </section>
 <section>
-<section id="slide-orgb3299c1">
-<h2 id="orgb3299c1">Plan</h2>
+<section id="slide-org486c1b0">
+<h2 id="org486c1b0">Plan</h2>
 <ul>
 <li>Why concurrency?</li>
 <li>Theory of Actor Model</li>
@@ -52,20 +52,21 @@ Things fail."<br />
 </section>
 </section>
 <section>
-<section id="slide-org038c878">
-<h2 id="org038c878">Why concurrency?</h2>
-<div class="outline-text-2" id="text-org038c878">
-</div></section>
-<section id="slide-orgd7a709a">
-<h3 id="orgd7a709a">"The Free Lunch Is Over" (2005)</h3>
+<section id="slide-orgef9b91d">
+<h2 id="orgef9b91d">Why concurrency?</h2>
+<div class="outline-text-2" id="text-orgef9b91d">
+</div>
+</section>
+<section id="slide-orgf53b7e4">
+<h3 id="orgf53b7e4">"The Free Lunch Is Over" (2005)</h3>
 
 <div class="figure">
 <p><img src="./img/free_lunch.png" alt="free_lunch.png" height="50%," width="50%" style="border: none;" />
 </p>
 </div>
 </section>
-<section id="slide-orgd1e6645">
-<h3 id="orgd1e6645">"The Free Lunch Is Over" Conclusion</h3>
+<section id="slide-orgba2f30b">
+<h3 id="orgba2f30b">"The Free Lunch Is Over" Conclusion</h3>
 <blockquote nil>
 <p>
 "If you haven’t done so already, <b>now is the time to take a hard look at the design of your application, determine what operations are CPU-sensitive</b> now or are likely to become so soon, <b>and identify how those places could benefit from concurrency</b>.<br />
@@ -74,8 +75,8 @@ Now is also the time for you and <b>your team to grok concurrent programming</b>
 </blockquote>
 
 </section>
-<section id="slide-org6b99385">
-<h3 id="org6b99385">New Concurrent Programming Languages</h3>
+<section id="slide-org527db3e">
+<h3 id="org527db3e">New Concurrent Programming Languages</h3>
 <dl>
 <dt>Clojure</dt><dd>2007 [STM, agents, CSP] (Java, CLR)</dd>
 <dt>Go</dt><dd>2009 [CSP] (Python, C++)</dd>
@@ -83,8 +84,8 @@ Now is also the time for you and <b>your team to grok concurrent programming</b>
 
 </dl>
 </section>
-<section id="slide-org1262c32">
-<h3 id="org1262c32">Languages/Frameworks with Actors libraries</h3>
+<section id="slide-org6fe5696">
+<h3 id="org6fe5696">Languages/Frameworks with Actors libraries</h3>
 <dl>
 <dt>Erlang/Elixir</dt><dd>-</dd>
 <dt>Scala</dt><dd>Akka</dd>
@@ -96,18 +97,19 @@ Now is also the time for you and <b>your team to grok concurrent programming</b>
 </section>
 </section>
 <section>
-<section id="slide-orgb7518c4">
-<h2 id="orgb7518c4">Actor Model</h2>
-<div class="outline-text-2" id="text-orgb7518c4">
-</div></section>
-<section id="slide-org0a864f1">
-<h3 id="org0a864f1">Carl Hewitt (1973)</h3>
+<section id="slide-org18405ee">
+<h2 id="org18405ee">Actor Model</h2>
+<div class="outline-text-2" id="text-org18405ee">
+</div>
+</section>
+<section id="slide-org3861afa">
+<h3 id="org3861afa">Carl Hewitt (1973)</h3>
 <p>
 Actor Model is a conceptual model to deal with concurrent computation.
 </p>
 </section>
-<section id="slide-org136ecf6">
-<h3 id="org136ecf6">Actor</h3>
+<section id="slide-org91eb6b2">
+<h3 id="org91eb6b2">Actor</h3>
 <ul>
 <li>An actor is the <b>fundamental unit of computation</b>.</li>
 <li>Internal State.</li>
@@ -121,8 +123,8 @@ Actor Model is a conceptual model to deal with concurrent computation.
 
 </ul>
 </section>
-<section id="slide-orgf53c4cc">
-<h3 id="orgf53c4cc">"One Ant is no Ant"</h3>
+<section id="slide-org8e2fc00">
+<h3 id="org8e2fc00">"One Ant is no Ant"</h3>
 <p>
 Actors come in "systems". To distinguish between them, they need an address.
 </p>
@@ -132,8 +134,8 @@ Actors come in "systems". To distinguish between them, they need an address.
 </p>
 </div>
 </section>
-<section id="slide-orgba7a62f">
-<h3 id="orgba7a62f">Message Passing</h3>
+<section id="slide-orgb729127">
+<h3 id="orgb729127">Message Passing</h3>
 <ul>
 <li>Messages are sent asynchronously</li>
 <li>Message order is not guaranteed</li>
@@ -145,12 +147,13 @@ Actors come in "systems". To distinguish between them, they need an address.
 </section>
 </section>
 <section>
-<section id="slide-org4ace4a5">
-<h2 id="org4ace4a5">Concurrency in Elixir</h2>
-<div class="outline-text-2" id="text-org4ace4a5">
-</div></section>
-<section id="slide-org598574c">
-<h3 id="org598574c">Actor = Process</h3>
+<section id="slide-org483d29c">
+<h2 id="org483d29c">Concurrency in Elixir</h2>
+<div class="outline-text-2" id="text-org483d29c">
+</div>
+</section>
+<section id="slide-org9bde10d">
+<h3 id="org9bde10d">Actor = Process</h3>
 <ul>
 <li>Very lightweight compared to OS threads and processes.</li>
 <li>Processes share no memory.</li>
@@ -158,58 +161,58 @@ Actors come in "systems". To distinguish between them, they need an address.
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-elixir">spawn <span style="color: #4f97d7; font-weight: bold;">fn</span> -&gt; <span style="color: #a45bad;">1</span>+<span style="color: #a45bad;">2</span> <span style="color: #4f97d7; font-weight: bold;">end</span>
+<pre  class="src src-elixir">spawn fn -&gt; 1+2 end
 </pre>
 </div>
 </section>
-<section id="slide-orgc352d5f">
-<h3 id="orgc352d5f">Actor Example</h3>
+<section id="slide-orgc9ad473">
+<h3 id="orgc9ad473">Actor Example</h3>
 <div class="org-src-container">
 
-<pre  class="src src-elixir"><span style="color: #4f97d7; font-weight: bold;">defmodule</span> <span style="color: #ce537a; font-weight: bold;">Counter</span> <span style="color: #4f97d7; font-weight: bold;">do</span>
-  <span style="color: #4f97d7; font-weight: bold;">def</span> <span style="color: #bc6ec5; font-weight: bold;">loop</span><span style="color: #4f97d7;">(</span>count<span style="color: #4f97d7;">)</span> <span style="color: #4f97d7; font-weight: bold;">do</span>
-    <span style="color: #4f97d7; font-weight: bold;">receive</span> <span style="color: #4f97d7; font-weight: bold;">do</span>
-      <span style="color: #4f97d7;">{</span><span style="color: #87cefa;">:inc</span><span style="color: #4f97d7;">}</span> -&gt;
-        <span style="color: #7590db;">count</span> = count + <span style="color: #a45bad;">1</span>
-        <span style="color: #ce537a; font-weight: bold;">IO</span>.puts<span style="color: #4f97d7;">(</span><span style="color: #2d9574;">"counter is </span><span style="color: #7590db;">#{count}</span><span style="color: #2d9574;">"</span><span style="color: #4f97d7;">)</span>
-        loop<span style="color: #4f97d7;">(</span>count<span style="color: #4f97d7;">)</span>
-    <span style="color: #4f97d7; font-weight: bold;">end</span>
-  <span style="color: #4f97d7; font-weight: bold;">end</span>
-<span style="color: #4f97d7; font-weight: bold;">end</span>
+<pre  class="src src-elixir">defmodule Counter do
+  def loop(count) do
+    receive do
+      {:inc} -&gt;
+	count = count + 1
+	IO.puts("counter is #{count}")
+	loop(count)
+    end
+  end
+end
 
-<span style="color: #7590db;">pid</span> = spawn<span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">Counter</span>, <span style="color: #87cefa;">:loop</span>, <span style="color: #bc6ec5;">[</span><span style="color: #a45bad;">0</span><span style="color: #bc6ec5;">]</span><span style="color: #4f97d7;">)</span>
+pid = spawn(Counter, :loop, [0])
 </pre>
 </div>
 </section>
-<section id="slide-orgc1cb45c">
-<h3 id="orgc1cb45c">Message = Term</h3>
+<section id="slide-org8a0632c">
+<h3 id="org8a0632c">Message = Term</h3>
 <div class="org-src-container">
 
-<pre  class="src src-elixir"><span style="color: #a45bad;">42</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">number</span>
+<pre  class="src src-elixir">42 # number
 
-<span style="color: #2d9574;">"Hello World!"</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">string</span>
+"Hello World!" # string
 
-<span style="color: #87cefa;">:foo</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">atom</span>
+:foo # atom
 
-<span style="color: #4f97d7;">{</span><span style="color: #a45bad;">42</span>, <span style="color: #2d9574;">"Hello World"</span><span style="color: #4f97d7;">}</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">tuple</span>
+{42, "Hello World"} # tuple
 
-<span style="color: #4f97d7;">[</span><span style="color: #a45bad;">1</span>,<span style="color: #a45bad;">2</span>,<span style="color: #a45bad;">3</span>,<span style="color: #a45bad;">4</span><span style="color: #4f97d7;">]</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">list</span>
+[1,2,3,4] # list
 
-%<span style="color: #4f97d7;">{</span><span style="color: #87cefa;">:key1</span> =&gt; <span style="color: #2d9574;">"value1"</span>, <span style="color: #87cefa;">:key2</span> =&gt; <span style="color: #2d9574;">"value2"</span><span style="color: #4f97d7;">}</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">map</span>
+%{:key1 =&gt; "value1", :key2 =&gt; "value2"} # map
 
-<span style="color: #7590db;">double</span> = <span style="color: #4f97d7; font-weight: bold;">fn</span><span style="color: #4f97d7;">(</span>x<span style="color: #4f97d7;">)</span> -&gt; x*<span style="color: #a45bad;">2</span> <span style="color: #4f97d7; font-weight: bold;">end</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">function</span>
-double.<span style="color: #4f97d7;">(</span><span style="color: #a45bad;">4</span><span style="color: #4f97d7;">)</span>
+double = fn(x) -&gt; x*2 end # function
+double.(4)
 
-<span style="color: #ce537a; font-weight: bold;">%User</span><span style="color: #4f97d7;">{</span><span style="color: #87cefa;">age:</span> <span style="color: #a45bad;">27</span>, <span style="color: #87cefa;">name:</span> <span style="color: #2d9574;">"John"</span><span style="color: #4f97d7;">}</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">struct</span>
+%User{age: 27, name: "John"} # struct
 
-make_ref<span style="color: #4f97d7;">()</span> <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">ref</span>
+make_ref() # ref
 
-open_port <span style="color: #2aa1ae; background-color: #292e34;"># </span><span style="color: #2aa1ae; background-color: #292e34;">port</span>
+open_port # port
 </pre>
 </div>
 </section>
-<section id="slide-org5ecc16e">
-<h3 id="org5ecc16e">Message Passing</h3>
+<section id="slide-orge07d3d9">
+<h3 id="orge07d3d9">Message Passing</h3>
 <ul>
 <li>Asynchronous (non-blocking)</li>
 <li>Data Copy</li>
@@ -218,32 +221,33 @@ open_port <span style="color: #2aa1ae; background-color: #292e34;"># </span><spa
 </ul>
 <div class="org-src-container">
 
-<pre  class="src src-elixir"><span style="color: #7590db;">pid</span> = spawn<span style="color: #4f97d7;">(</span><span style="color: #ce537a; font-weight: bold;">&amp;Counter</span>.loop/<span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>
-<span style="color: #4f97d7; font-weight: bold;">send</span><span style="color: #4f97d7;">(</span>pid, <span style="color: #bc6ec5;">{</span><span style="color: #87cefa;">:inc</span>, <span style="color: #a45bad;">5</span><span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
-<span style="color: #4f97d7; font-weight: bold;">send</span><span style="color: #4f97d7;">(</span>pid, <span style="color: #bc6ec5;">{</span><span style="color: #87cefa;">:inc</span>, <span style="color: #a45bad;">2</span><span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
-<span style="color: #4f97d7; font-weight: bold;">send</span><span style="color: #4f97d7;">(</span>pid, <span style="color: #bc6ec5;">{</span><span style="color: #87cefa;">:inc</span>, <span style="color: #a45bad;">7</span><span style="color: #bc6ec5;">}</span><span style="color: #4f97d7;">)</span>
+<pre  class="src src-elixir">pid = spawn(&amp;Counter.loop/0)
+send(pid, {:inc, 5})
+send(pid, {:inc, 2})
+send(pid, {:inc, 7})
 </pre>
 </div>
 </section>
 </section>
 <section>
-<section id="slide-org31a0c1b">
-<h2 id="org31a0c1b">Demo</h2>
-<div class="outline-text-2" id="text-org31a0c1b">
-</div></section>
-<section id="slide-orgb565b94">
-<h3 id="orgb565b94">Counter</h3>
+<section id="slide-org9618662">
+<h2 id="org9618662">Demo</h2>
+<div class="outline-text-2" id="text-org9618662">
+</div>
 </section>
-<section id="slide-org5f680fc">
-<h3 id="org5f680fc">Chat Server</h3>
+<section id="slide-org3b6ae0e">
+<h3 id="org3b6ae0e">Counter</h3>
 </section>
-<section id="slide-orgb617392">
-<h3 id="orgb617392">Distributed Chat Server</h3>
+<section id="slide-org298f15f">
+<h3 id="org298f15f">Chat Server</h3>
+</section>
+<section id="slide-org72da168">
+<h3 id="org72da168">Distributed Chat Server</h3>
 </section>
 </section>
 <section>
-<section id="slide-orgef6656a">
-<h2 id="orgef6656a">Recap</h2>
+<section id="slide-org929a32a">
+<h2 id="org929a32a">Recap</h2>
 <ul>
 <li>"The free lunch is over", we have to start designing with concurrency in mind.</li>
 <li>Actor Model models concurrency with message passing between independent actors.</li>
@@ -253,8 +257,8 @@ open_port <span style="color: #2aa1ae; background-color: #292e34;"># </span><spa
 </section>
 </section>
 <section>
-<section id="slide-orgb1212a8">
-<h2 id="orgb1212a8">References</h2>
+<section id="slide-orgd412e50">
+<h2 id="orgd412e50">References</h2>
 <ul>
 <li><a href="http://www.gotw.ca/publications/concurrency-ddj.htm">The Free Lunch Is Over</a>  [ARTICLE]</li>
 <li><a href="https://www.youtube.com/watch?v=7erJ1DV_Tlo">Hewitt, Meijer and Szyperski: The Actor Model</a> [VIDEO]</li>
@@ -269,8 +273,8 @@ open_port <span style="color: #2aa1ae; background-color: #292e34;"># </span><spa
 </section>
 </section>
 <section>
-<section id="slide-orgc390362">
-<h2 id="orgc390362">Food For Thought</h2>
+<section id="slide-orgd813fe0">
+<h2 id="orgd813fe0">Food For Thought</h2>
 <dl>
 <dt>OTP</dt><dd>set of Erlang libraries to module concurrent processes well.</dd>
 <dt>Riak Core</dt><dd>Library to build Distributed Systems in Erlang</dd>
@@ -281,13 +285,13 @@ open_port <span style="color: #2aa1ae; background-color: #292e34;"># </span><spa
 </section>
 </section>
 <section>
-<section id="slide-orgc0f22c2">
-<h2 id="orgc0f22c2">Q&amp;A</h2>
+<section id="slide-org7a22fb7">
+<h2 id="org7a22fb7">Q&amp;A</h2>
 </section>
 </section>
 <section>
-<section id="slide-org44c9b44">
-<h2 id="org44c9b44">Thanks!</h2>
+<section id="slide-orgf78d596">
+<h2 id="orgf78d596">Thanks!</h2>
 </section>
 </section>
 </div>
